@@ -27,6 +27,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
       className,
+      children,
       disabled: buttonDisabled,
       isLoading,
       variant = 'primary',
@@ -107,7 +108,8 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
             <ImSpinner2 className='animate-spin' />
           </div>
         )}
-        {Icon && <Icon size='1em' className={cn(classNames?.icon)} />}
+        {Icon && <Icon size='1em' className={cn('mr-2', classNames?.icon)} />}
+        {children}
       </button>
     );
   }
