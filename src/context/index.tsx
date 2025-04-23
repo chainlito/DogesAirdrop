@@ -1,5 +1,7 @@
 'use client';
 
+import { arbitrum, mainnet } from '@reown/appkit/networks';
+import { createAppKit } from '@reown/appkit/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { type ReactNode } from 'react';
 import { type Config, cookieToInitialState, WagmiProvider } from 'wagmi';
@@ -13,27 +15,25 @@ if (!projectId) {
   throw new Error('Project ID is not defined');
 }
 
-/* 
 // Set up metadata
 const metadata = {
   name: 'appkit-example',
   description: 'AppKit Example',
-  // url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
+  url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/179229932'],
 };
 
 // Create the modal
-const modal = createAppKit({
+/* const modal =  */ createAppKit({
   adapters: [wagmiAdapter],
   projectId,
   networks: [mainnet, arbitrum],
   defaultNetwork: mainnet,
-  // metadata: metadata,
+  metadata: metadata,
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
   },
 });
- */
 
 function ContextProvider({
   children,
