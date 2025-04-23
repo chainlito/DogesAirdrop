@@ -8,6 +8,10 @@ import { z } from 'zod';
 
 const envVariables = z.object({
   NEXT_PUBLIC_SHOW_LOGGER: z.enum(['true', 'false']).optional(),
+  NEXT_PUBLIC_BACKEND_URL: z
+    .string()
+    .url()
+    .default('http://localhost:8000/api/airdrop/'),
 });
 
 envVariables.parse(process.env);

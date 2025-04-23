@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { headers } from 'next/headers';
 import * as React from 'react';
 
 import '@/styles/globals.css';
@@ -6,6 +7,7 @@ import '@/styles/globals.css';
 import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
+import ContextProvider from '@/context';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -54,9 +56,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookies = headers().get('cookie');
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <ContextProvider cookies={cookies}> {children}</ContextProvider>
+      </body>
     </html>
   );
 }
