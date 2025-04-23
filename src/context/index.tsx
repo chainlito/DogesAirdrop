@@ -1,6 +1,6 @@
 'use client';
 
-import { arbitrum, mainnet } from '@reown/appkit/networks';
+import { arbitrum, mainnet, sepolia } from '@reown/appkit/networks';
 import { createAppKit } from '@reown/appkit/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { type ReactNode } from 'react';
@@ -27,7 +27,7 @@ const metadata = {
 /* const modal =  */ createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [mainnet, arbitrum],
+  networks: [mainnet, arbitrum, sepolia],
   defaultNetwork: mainnet,
   metadata: metadata,
   features: {
