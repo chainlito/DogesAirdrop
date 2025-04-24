@@ -85,7 +85,7 @@ export default function HomePage() {
             setIsOpen(true);
           } catch (err) {
             alert('error occurred while claiming DOGES');
-            throw new Error(err);
+            throw new Error(String(err));
           }
         } else {
           // alert('You have already claimed your DOGES');
