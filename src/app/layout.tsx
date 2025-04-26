@@ -9,7 +9,6 @@ import '@/styles/colors.css';
 import { siteConfig } from '@/constant/config';
 import ContextProvider from '@/context';
 
-
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
 export const metadata: Metadata = {
