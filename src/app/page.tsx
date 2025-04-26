@@ -54,7 +54,7 @@ export default function HomePage() {
     }
     setCurrentSearchAddress(value);
     axios
-      .get(process.env.NEXT_PUBLIC_BACKEND_URL + value)
+      .get(process.env.NEXT_PUBLIC_BACKEND_URL + value.toLowerCase())
       .then((res) => {
         setCurrentSearchAmount(
           res.data.data?.Amount ? res.data.data.Amount : 0
@@ -67,7 +67,9 @@ export default function HomePage() {
 
   const onClaim = async () => {
     axios
-      .get(process.env.NEXT_PUBLIC_BACKEND_URL + address)
+      .get(
+        process.env.NEXT_PUBLIC_BACKEND_URL + address?.toString().toLowerCase()
+      )
       .then(async (res) => {
         // setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
         if (res.data.data?.Amount && res.data.data?.Proof) {
@@ -105,7 +107,9 @@ export default function HomePage() {
 
   React.useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_BACKEND_URL + address)
+      .get(
+        process.env.NEXT_PUBLIC_BACKEND_URL + address?.toString().toLowerCase()
+      )
       .then((res) => {
         setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
       })
@@ -178,7 +182,9 @@ export default function HomePage() {
                 <div className='ml-[35%] w-[30%] mb-8 font-satoshi border-2 p-2 rounded-full border-gray-300 font-bold'>
                   $DOGES Airdrop
                 </div>
-                <div className='font-slacky text-[60px]'>Congratulations!</div>
+                <div className='font-slacky text-[] sm:text-[40px] md:text-[60px]'>
+                  Congratulations!
+                </div>
                 <div className='flex place-content-center justify-items-center mt-4'>
                   <p className='text-sm text-gray-800 mt-2'>
                     You have eligible {currentMyAmount} $DOGES to claim.
