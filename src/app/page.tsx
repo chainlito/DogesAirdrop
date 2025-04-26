@@ -117,7 +117,7 @@ export default function HomePage() {
   return (
     <main>
       <Head>
-        <title>Hi</title>
+        <title>$DOGES Airdrop For Shibes</title>
       </Head>
       <section className='bg-white'>
         <div className=' relative flex h-screen flex-col items-center justify-center py-12 text-center bg-[#F0EFE8]'>
