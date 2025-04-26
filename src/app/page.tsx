@@ -30,7 +30,7 @@ import Dog from '~/images/dog.png';
 import Money1 from '~/images/money1.png';
 import Money2 from '~/images/money2.png';
 import Grass from '~/svg/grass.png';
-import Logo from '~/svg/Logo.png';
+import Logo from '~/svg/logo.png';
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 // Before you begin editing, follow all comments with `STARTERCONF`,
