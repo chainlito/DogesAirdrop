@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { ArrowRight, Search, X } from 'lucide-react';
 import Head from 'next/head';
 import * as React from 'react';
+import { formatUnits } from 'viem';
 
 // import '@/lib/env';
 import IconButton from '@/components/buttons/IconButton';
@@ -57,7 +58,7 @@ export default function HomePage() {
       .get(process.env.NEXT_PUBLIC_BACKEND_URL + value.toLowerCase())
       .then((res) => {
         setCurrentSearchAmount(
-          res.data.data?.Amount ? res.data.data.Amount : 0
+          res.data.data?.Balance ? res.data.data.Balance : 0
         );
       })
       .catch((error) => {
@@ -72,8 +73,8 @@ export default function HomePage() {
       )
       .then(async (res) => {
         // setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
-        if (res.data.data?.Amount && res.data.data?.Proof) {
-          const amount = res.data.data.Amount;
+        if (res.data.data?.Balance && res.data.data?.Proof) {
+          const amount = res.data.data.Balance;
           const proof: string = res.data.data.Proof;
           const addresses: string[] = proof
             .replace(/[[\]\s]/g, '') // remove brackets and spaces
@@ -111,7 +112,7 @@ export default function HomePage() {
         process.env.NEXT_PUBLIC_BACKEND_URL + address?.toString().toLowerCase()
       )
       .then((res) => {
-        setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
+        setCurrentMyAmount(res.data.data?.Balance ? res.data.data.Balance : 0);
       })
       .catch((error) => {
         throw new Error(error);
@@ -187,7 +188,11 @@ export default function HomePage() {
                 </div>
                 <div className='flex place-content-center justify-items-center mt-4'>
                   <p className='text-sm text-gray-800 mt-2'>
-                    You have eligible {currentMyAmount} $DOGES to claim.
+                    You have eligible{' '}
+                    {Number(formatUnits(BigInt(currentMyAmount), 18)).toFixed(
+                      2
+                    )}{' '}
+                    $DOGES to claim.
                   </p>
                   <IconButton
                     variant='outline'
@@ -247,7 +252,11 @@ export default function HomePage() {
                 }`}
               >
                 {currentSearchAddress}
-                is eligible to claim {currentSearchAmount} $DOGES
+                is eligible to claim{' '}
+                {Number(formatUnits(BigInt(currentSearchAmount), 18)).toFixed(
+                  2
+                )}{' '}
+                $DOGES
               </p>
 
               <TransactionModal
