@@ -20,12 +20,17 @@ dotenv.config();
  * You can override the next-env if the type is important to you
  * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
  */
+import Image from 'next/image';
 import { isAddress } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import TransactionModal from '@/components/modal/TransactionModal';
 
-import Logo from '~/svg/Logo.svg';
+import Dog from '~/images/dog.png';
+import Money1 from '~/images/money1.png';
+import Money2 from '~/images/money2.png';
+import Grass from '~/svg/grass.png';
+import Logo from '~/svg/Logo.png';
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 // Before you begin editing, follow all comments with `STARTERCONF`,
@@ -77,7 +82,7 @@ export default function HomePage() {
             const tx1Hash = await writeContractAsync({
               abi: CONTRACT_ABI,
               address: process.env
-                .NEXT_PUBLIC_SEPOLIA_CONTRACT_ADDRESS as `0x${string}`,
+                .NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
               functionName: 'claim',
               args: [amount, addresses],
             });
@@ -115,101 +120,152 @@ export default function HomePage() {
         <title>Hi</title>
       </Head>
       <section className='bg-white'>
-        <header className='absolute top-2 text-gray-700 w-full'>
-          {/* <IconButton icon={Wallet} variant='outline' className='flex-row'>
+        <div className=' relative flex h-screen flex-col items-center justify-center py-12 text-center bg-[#F0EFE8]'>
+          <div className='  absolute top-0 left-0 w-full h-[60%]  z-0'>
+            <header className=' absolute top-2 text-gray-700 w-full flex '>
+              {/* <IconButton icon={Wallet} variant='outline' className='flex-row'>
             Connect Wallet
           </IconButton> */}
-          <div className='flex max-w-full justify-end'>
-            <appkit-button></appkit-button>
+              <div className=' w-10 ml-[10%] sm:ml-[5%] mt-[1%] flex flex-row items-center justify-center'>
+                <Image src={Logo} alt='Logo' />
+                <span className='font-slacky text-center text-sm sm:text-md md:text-lg'>
+                  $DOGES
+                </span>
+              </div>
+              <div className='  flex w-full justify-end'>
+                <appkit-button></appkit-button>
+              </div>
+            </header>
           </div>
-        </header>
-        <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
-          <Logo className='w-16' />
-          <h1 className={`mt-4 mb-4 ${status == 'connected' ? 'hidden' : ''}`}>
-            Please Connect your walllet
-          </h1>
+
+          {/* Bottom Half - Background Image */}
           <div
-            className={`mt-2 mb-20 flex ${
-              status == 'connected' ? '' : 'hidden'
-            }`}
-          >
-            <p className='text-sm text-gray-800'>
-              Congratulations! You have eligible {currentMyAmount} $DOGES to
-              claim.
-            </p>
-            <IconButton variant='outline' className='text-sm' onClick={onClaim}>
-              Claim Now
-            </IconButton>
-          </div>
-
-          {/* <TextInput
-            placeholder='Search by Address'
-            wrapperClassName='mt-2'
-            variant='basic'
-          /> */}
-
-          <div className='relative w-[60%]'>
-            {/* Fake placeholder icon */}
-            {!value && (
-              <Search
-                size={14}
-                className='absolute left-3 top-1/2 -translate-y-1/2 text-[#A0A0A0] pointer-events-none'
-              />
-            )}
-
-            <div className='flex items-center border border-[#E5E5E5] rounded-lg bg-[#f1f1f1] px-2.5 py-[3px] shadow-sm'>
-              <input
-                type='text'
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    onSearch(); // replace this with your actual function
-                  }
-                }}
-                onChange={(e) => setValue(e.target.value)}
-                className='pl-6 flex-grow bg-transparent outline-none border-none focus:ring-0 focus:outline-none focus:border-none text-[13px] font-sans'
-                placeholder='Search by Address'
-              />
-              {value && (
-                <>
-                  <button
-                    onClick={() => setValue('')}
-                    className='text-[#A0A0A0] hover:text-gray-600 ml-1'
-                  >
-                    <X size={14} />
-                  </button>
-                  <button
-                    onClick={onSearch}
-                    className='text-[#A0A0A0] hover:text-gray-600 ml-1'
-                  >
-                    <ArrowRight size={14} />
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          <p
-            className={`mt-5 text-sm text-gray-700 ${
-              isAddress(value) && isAddress(currentSearchAddress)
-                ? ''
-                : 'hidden'
-            }`}
-          >
-            {currentSearchAddress}
-            is eligible to claim {currentSearchAmount} $DOGES
-          </p>
-
-          <TransactionModal
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-            txHash={txHash}
-            amount={currentMyAmount.toString()}
+            className='absolute bottom-0 left-0 w-full h-[40%] bg-cover bg-center z-0'
+            style={{
+              backgroundImage: `url(${Grass.src})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
           />
 
-          <footer className='absolute bottom-2 text-gray-700'>
-            © {new Date().getFullYear()} By{' '}
-            <UnderlineLink href='https://t.me'>Doges Community</UnderlineLink>
-          </footer>
+          {/* Content on top (optional) */}
+          <div className=' relative flex items-center justify-center py-12 text-center bg-transparent min-h-[90vh]  h-[70%] z-0 w-full'>
+            <div className='h-[70%] w-[15%] z-9'>
+              <Image
+                className='mt-[70%] sm:mt-[80%] md:mt-[90%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%]'
+                src={Dog}
+                alt='dog'
+              ></Image>
+              <Image
+                className='mt-[30%] sm:mt-[10%] md:mt-[-30%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%]'
+                src={Money1}
+                alt='dog'
+              ></Image>
+            </div>
+            <div className='relative flex flex-col items-center justify-center py-12 text-center bg-white !h-[70%] rounded-xl shadow-lg z-10 w-[70%]'>
+              <h1
+                className={`font-slacky mt-4 mb-4 ${
+                  status == 'connected' ? 'hidden' : ''
+                }`}
+              >
+                Please Connect your walllet
+              </h1>
+              <div
+                className={`mt-2 mb-20 ${
+                  status == 'connected' ? '' : 'hidden'
+                }`}
+              >
+                <div className='ml-[35%] w-[30%] mb-8 font-satoshi border-2 p-2 rounded-full border-gray-300 font-bold'>
+                  $DOGES Airdrop
+                </div>
+                <div className='font-slacky text-[60px]'>Congratulations!</div>
+                <div className='flex place-content-center justify-items-center mt-4'>
+                  <p className='text-sm text-gray-800 mt-2'>
+                    You have eligible {currentMyAmount} $DOGES to claim.
+                  </p>
+                  <IconButton
+                    variant='outline'
+                    className='text-sm bg-[#95B943] text-black border-black rounded-full ml-4'
+                    onClick={onClaim}
+                  >
+                    Claim Now
+                  </IconButton>
+                </div>
+              </div>
+
+              <div className='relative w-[60%]'>
+                {/* Fake placeholder icon */}
+                {!value && (
+                  <Search
+                    size={14}
+                    className='absolute left-3 top-1/2 -translate-y-1/2 text-[#A0A0A0] pointer-events-none'
+                  />
+                )}
+
+                <div className='flex items-center border border-[#E5E5E5] bg-[#F1F5FF] rounded-lg  px-2.5 py-[3px] shadow-sm'>
+                  <input
+                    type='text'
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        onSearch(); // replace this with your actual function
+                      }
+                    }}
+                    onChange={(e) => setValue(e.target.value)}
+                    className='font-satoshi bg-[#F1F4FE] border-black rounded-3xl  pl-6 flex-grow bg-transparent outline-none border-none focus:ring-0 focus:outline-none focus:border-none text-[13px] font-sans'
+                    placeholder='Search by Address'
+                  />
+                  {value && (
+                    <>
+                      <button
+                        onClick={() => setValue('')}
+                        className='text-[#A0A0A0] hover:text-gray-600 ml-1'
+                      >
+                        <X size={14} />
+                      </button>
+                      <button
+                        onClick={onSearch}
+                        className='text-[#A0A0A0] hover:text-gray-600 ml-1'
+                      >
+                        <ArrowRight size={14} />
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <p
+                className={`mt-5 text-sm text-gray-700 ${
+                  isAddress(value) && isAddress(currentSearchAddress)
+                    ? ''
+                    : 'hidden'
+                }`}
+              >
+                {currentSearchAddress}
+                is eligible to claim {currentSearchAmount} $DOGES
+              </p>
+
+              <TransactionModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                txHash={txHash}
+                amount={currentMyAmount.toString()}
+              />
+
+              <footer className='font-satoshi absolute bottom-2 text-gray-700'>
+                © {new Date().getFullYear()} By{' '}
+                <UnderlineLink href='https://t.me'>
+                  Doges Community
+                </UnderlineLink>
+              </footer>
+            </div>
+            <div className='h-[70%] w-[15%] z-1000'>
+              <Image
+                className='ml-[-30%] z-1000'
+                src={Money2}
+                alt='dog'
+              ></Image>
+            </div>
+          </div>
         </div>
       </section>
     </main>

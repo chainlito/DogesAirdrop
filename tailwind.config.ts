@@ -7,6 +7,8 @@ export default {
     extend: {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        slacky: ['Slacky', ...defaultTheme.fontFamily.sans],
+        satoshi: ['Satoshi', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: {
