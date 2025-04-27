@@ -69,25 +69,27 @@ export default function HomePage() {
   const onClaim = async () => {
     axios
       .get(
-        process.env.NEXT_PUBLIC_BACKEND_URL + address?.toString().toLowerCase()
+        process.env.NEXT_PUBLIC_BACKEND_URL +
+          '0xa221af4a429b734abb1cc53fbd0c1d0fa47e1494' /* address?.toString().toLowerCase() */
       )
       .then(async (res) => {
         // setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
         if (res.data.data?.Balance && res.data.data?.Proof) {
+          console.log(res.data.data);
           const amount = res.data.data.Balance;
-          const proof: string = res.data.data.Proof;
+          /* const proof: string = res.data.data.Proof;
           const addresses: string[] = proof
             .replace(/[[\]\s]/g, '') // remove brackets and spaces
             .split(',')
-            .map((p) => p.trim());
-          // console.log(addresses);
+            .map((p) => p.trim()); */
+          console.log(res.data.data.Proof);
           try {
             const tx1Hash = await writeContractAsync({
               abi: CONTRACT_ABI,
               address: process.env
-                .NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                .NEXT_PUBLIC_SEPOLIA_CONTRACT_ADDRESS as `0x${string}`,
               functionName: 'claim',
-              args: [amount, addresses],
+              args: [amount, res.data.data.Proof],
             });
             setTxHash(tx1Hash);
             setIsOpen(true);
@@ -155,16 +157,16 @@ export default function HomePage() {
 
           {/* Content on top (optional) */}
           <div className=' relative flex items-center justify-center py-12 text-center bg-transparent min-h-[90vh]  h-[70%] z-0 w-full'>
-            <div className='h-[70%] w-[15%] z-9'>
+            <div className='h-[70%] md:h-[90%] w-[15%] z-9'>
               <Image
-                className='mt-[70%] sm:mt-[80%] md:mt-[90%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%]'
+                className='!w-100px] mt-[70%] sm:mt-[80%] md:mt-[90%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%] object-cover'
                 src={Dog}
                 alt='dog'
               ></Image>
               <Image
                 className='mt-[30%] sm:mt-[10%] md:mt-[-30%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%]'
                 src={Money1}
-                alt='dog'
+                alt='Money'
               ></Image>
             </div>
             <div className='relative flex flex-col items-center justify-center py-12 text-center bg-white !h-[70%] rounded-xl shadow-lg z-10 w-[70%]'>
@@ -180,7 +182,7 @@ export default function HomePage() {
                   status == 'connected' ? '' : 'hidden'
                 }`}
               >
-                <div className='ml-[35%] w-[30%] mb-8 font-satoshi border-2 p-2 rounded-full border-gray-300 font-bold'>
+                <div className='text-[12px] sm:text-sm ml-[35%] w-[30%] mb-8 font-satoshi border-2 p-2 rounded-full border-gray-300 font-bold'>
                   $DOGES Airdrop
                 </div>
                 <div className='font-slacky text-[] sm:text-[40px] md:text-[60px]'>
@@ -222,7 +224,7 @@ export default function HomePage() {
                       }
                     }}
                     onChange={(e) => setValue(e.target.value)}
-                    className='font-satoshi bg-[#F1F4FE] border-black rounded-3xl  pl-6 flex-grow bg-transparent outline-none border-none focus:ring-0 focus:outline-none focus:border-none text-[13px] font-sans'
+                    className='w-[100%] font-satoshi bg-[#F1F4FE] border-black rounded-3xl  pl-6 flex-grow bg-transparent outline-none border-none focus:ring-0 focus:outline-none focus:border-none text-[13px] font-sans'
                     placeholder='Search by Address'
                   />
                   {value && (
@@ -244,8 +246,8 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <p
-                className={`mt-5 text-sm text-gray-700 ${
+              <h3
+                className={`mt-5 text-sm text-gray-700 break-words w-[100%] ${
                   isAddress(value) && isAddress(currentSearchAddress)
                     ? ''
                     : 'hidden'
@@ -257,7 +259,7 @@ export default function HomePage() {
                   2
                 )}{' '}
                 $DOGES
-              </p>
+              </h3>
 
               <TransactionModal
                 isOpen={isOpen}
