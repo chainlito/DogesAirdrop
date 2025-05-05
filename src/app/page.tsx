@@ -70,24 +70,22 @@ export default function HomePage() {
     axios
       .get(
         process.env.NEXT_PUBLIC_BACKEND_URL +
-          '0xa221af4a429b734abb1cc53fbd0c1d0fa47e1494' /* address?.toString().toLowerCase() */
+        address?.toString().toLowerCase()
       )
       .then(async (res) => {
         // setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
         if (res.data.data?.Balance && res.data.data?.Proof) {
-          console.log(res.data.data);
           const amount = res.data.data.Balance;
           /* const proof: string = res.data.data.Proof;
           const addresses: string[] = proof
             .replace(/[[\]\s]/g, '') // remove brackets and spaces
             .split(',')
             .map((p) => p.trim()); */
-          console.log(res.data.data.Proof);
           try {
             const tx1Hash = await writeContractAsync({
               abi: CONTRACT_ABI,
               address: process.env
-                .NEXT_PUBLIC_SEPOLIA_CONTRACT_ADDRESS as `0x${string}`,
+                .NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
               functionName: 'claim',
               args: [amount, res.data.data.Proof],
             });
@@ -171,16 +169,14 @@ export default function HomePage() {
             </div>
             <div className='relative flex flex-col items-center justify-center py-12 text-center bg-white !h-[70%] rounded-xl shadow-lg z-10 w-[70%]'>
               <h1
-                className={`font-slacky mt-4 mb-4 ${
-                  status == 'connected' ? 'hidden' : ''
-                }`}
+                className={`font-slacky mt-4 mb-4 ${status == 'connected' ? 'hidden' : ''
+                  }`}
               >
                 Please Connect your walllet
               </h1>
               <div
-                className={`mt-2 mb-20 ${
-                  status == 'connected' ? '' : 'hidden'
-                }`}
+                className={`mt-2 mb-20 ${status == 'connected' ? '' : 'hidden'
+                  }`}
               >
                 <div className='text-[12px] sm:text-sm ml-[35%] w-[30%] mb-8 font-satoshi border-2 p-2 rounded-full border-gray-300 font-bold'>
                   $DOGES Airdrop
@@ -247,11 +243,10 @@ export default function HomePage() {
               </div>
 
               <h3
-                className={`mt-5 text-sm text-gray-700 break-words w-[100%] ${
-                  isAddress(value) && isAddress(currentSearchAddress)
+                className={`mt-5 text-sm text-gray-700 break-words w-[100%] ${isAddress(value) && isAddress(currentSearchAddress)
                     ? ''
                     : 'hidden'
-                }`}
+                  }`}
               >
                 {currentSearchAddress}
                 is eligible to claim{' '}
