@@ -12,6 +12,7 @@ import ContextProvider from '@/context';
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
 
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
