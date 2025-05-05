@@ -52,6 +52,11 @@ export default {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
       },
+      screens: {
+        'short': { 'raw': '(max-height: 630px)' },
+        'minishort': { 'raw': '(max-height: 600px)' },
+        'hsm': { 'raw': '(max-height: 480px)' },
+      }
     },
   },
   plugins: [require('@tailwindcss/forms')],

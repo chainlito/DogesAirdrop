@@ -210,7 +210,7 @@ export default function HomePage() {
                   />
                 )}
 
-                <div className='flex items-center border border-[#E5E5E5] bg-[#F1F5FF] rounded-lg  px-2.5 py-[3px] shadow-sm'>
+                <div className='hsm:hidden flex items-center border border-[#E5E5E5] bg-[#F1F5FF] rounded-lg  px-2.5 py-[3px] shadow-sm'>
                   <input
                     type='text'
                     onKeyDown={(e) => {
@@ -241,7 +241,7 @@ export default function HomePage() {
                 </div>
               </div>
               <h3
-                className={`mt-3 sm:mt-2 text-sm text-gray-700 break-words w-[100%] ${
+                className={`minishort:hidden mt-3 sm:mt-2 text-sm text-gray-700 break-words w-[100%] ${
                   isAddress(value) && isAddress(currentSearchAddress)
                     ? ''
                     : 'hidden'
@@ -261,7 +261,7 @@ export default function HomePage() {
                 amount={currentMyAmount.toString()}
               />
 
-              <footer className='font-satoshi absolute bottom-2 text-gray-700 text-sm mt-10'>
+              <footer className='font-satoshi absolute bottom-2 text-gray-700 text-sm mt-10 short:hidden'>
                 © {new Date().getFullYear()} By{' '}
                 <UnderlineLink href='https://t.me'>
                   Doges Community
