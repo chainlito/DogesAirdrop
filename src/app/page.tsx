@@ -69,8 +69,7 @@ export default function HomePage() {
   const onClaim = async () => {
     axios
       .get(
-        process.env.NEXT_PUBLIC_BACKEND_URL +
-        address?.toString().toLowerCase()
+        process.env.NEXT_PUBLIC_BACKEND_URL + address?.toString().toLowerCase()
       )
       .then(async (res) => {
         // setCurrentMyAmount(res.data.data?.Amount ? res.data.data.Amount : 0);
@@ -169,19 +168,19 @@ export default function HomePage() {
             </div>
             <div className='relative flex flex-col items-center justify-center py-12 text-center bg-white !h-[70%] rounded-xl shadow-lg z-10 w-[70%]'>
               <h1
-                className={`font-slacky mt-4 mb-4 ${status == 'connected' ? 'hidden' : ''
-                  }`}
+                className={`font-slacky mt-4 mb-4 ${
+                  status == 'connected' ? 'hidden' : ''
+                }`}
               >
                 Please Connect your walllet
               </h1>
               <div
-                className={`mt-2 mb-20 ${status == 'connected' ? '' : 'hidden'
-                  }`}
+                className={`mt-2 mb-8 ${status == 'connected' ? '' : 'hidden'}`}
               >
                 <div className='text-[12px] sm:text-sm ml-[35%] w-[30%] mb-8 font-satoshi border-2 p-2 rounded-full border-gray-300 font-bold'>
                   $DOGES Airdrop
                 </div>
-                <div className='font-slacky text-[] sm:text-[40px] md:text-[60px]'>
+                <div className='font-slacky text-[20px] sm:text-[40px] lg:text-[50px] md:text-[60px]'>
                   Congratulations!
                 </div>
                 <div className='flex place-content-center justify-items-center mt-4'>
@@ -241,15 +240,14 @@ export default function HomePage() {
                   )}
                 </div>
               </div>
-
               <h3
-                className={`mt-5 text-sm text-gray-700 break-words w-[100%] ${isAddress(value) && isAddress(currentSearchAddress)
+                className={`mt-3 sm:mt-2 text-sm text-gray-700 break-words w-[100%] ${
+                  isAddress(value) && isAddress(currentSearchAddress)
                     ? ''
                     : 'hidden'
-                  }`}
+                }`}
               >
-                {currentSearchAddress}
-                is eligible to claim{' '}
+                {currentSearchAddress} is eligible to claim
                 {Number(formatUnits(BigInt(currentSearchAmount), 18)).toFixed(
                   2
                 )}{' '}
@@ -263,7 +261,7 @@ export default function HomePage() {
                 amount={currentMyAmount.toString()}
               />
 
-              <footer className='font-satoshi absolute bottom-2 text-gray-700'>
+              <footer className='font-satoshi absolute bottom-2 text-gray-700 text-sm mt-10'>
                 © {new Date().getFullYear()} By{' '}
                 <UnderlineLink href='https://t.me'>
                   Doges Community
