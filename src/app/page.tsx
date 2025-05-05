@@ -156,7 +156,7 @@ export default function HomePage() {
           <div className=' relative flex items-center justify-center py-12 text-center bg-transparent min-h-[90vh]  h-[70%] z-0 w-full'>
             <div className='h-[70%] md:h-[90%] w-[15%] z-9'>
               <Image
-                className='[w-200px] short:[w-100px] mt-[70%] sm:mt-[80%] short:mt-[10%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%] object-cover'
+                className='[w-200px] short:[w-100px] mt-[30%] sm:mt-[80%]  short:mt-[10%] ml-[30%] sm:ml-[40%] md:gl-[42%] xl:ml-[47%] object-cover'
                 src={Dog}
                 alt='dog'
               ></Image>
